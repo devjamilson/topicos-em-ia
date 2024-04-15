@@ -50,22 +50,11 @@ body {
   align-items: center;
 
 }
-
-.icon{
-  color: #B7B7B7;
-  font-size: 4vh;
-  margin: 15px;
-}
-
-.icon:hover{
-  color: #1c3282;
+.menu.expanded {
+  width: 16vw; /* Largura expandida */
 }
 
 main{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
   height: 100vh;
   font-size: 40px;
 }

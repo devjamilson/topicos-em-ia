@@ -1,11 +1,8 @@
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Link from "next/link";
-import { AiFillMessage } from "react-icons/ai";
-import { FaRegCalendar } from "react-icons/fa";
-import { HiMiniDocumentText } from "react-icons/hi2";
-import { LuLayoutPanelLeft } from "react-icons/lu";
+import Menu from "./componentes/menu"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,16 +16,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  var expand = false
+  
   return (
     <html lang="pt-br">
       <body className={inter.className}>
         <div className="conteiner">
-            <div className="menu">
-              <Link href="/inicial" ><LuLayoutPanelLeft className="icon"/></Link>
-              <Link href="/chat" ><AiFillMessage className="icon"/></Link>
-              <Link href="/calendario" ><FaRegCalendar className="icon"/></Link>
-              <Link href="/referencias" ><HiMiniDocumentText className="icon"/></Link>
-            </div>
+            <Menu expand={expand}/>
             <div className="flex-grow">
               {children}
             </div>

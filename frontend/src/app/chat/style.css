@@ -1,0 +1,52 @@
+.container{
+    display: flex;
+}
+
+.perfil{
+    width: 20vw;
+    background-color: #fefefe;
+}
+
+
+.chat-menu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 15vh;
+}
+
+.chat-menu__pesquisa {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ccc; 
+    border-radius: 50px; 
+    height: 5.7vh;
+    font-size: 14px;
+    margin-top: 1vh;
+}
+  
+ 
+.chat-menu__novo-chat {
+    background-color: #04BD00; 
+    color: white; 
+    border: none; 
+    border-radius: 50px; 
+    cursor: pointer; 
+    height: 5.7vh;
+    width: 95%;
+    font-size: 14px;
+    margin-top: 1vh;
+}
+  
+  
+.chat-menu__novo-chat:hover {
+    background-color: rgb(35, 201, 40)
+}
+
+.chat{
+    height: 100%;
+    width: 75vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

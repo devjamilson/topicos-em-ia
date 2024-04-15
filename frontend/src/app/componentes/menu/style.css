@@ -1,0 +1,14 @@
+
+.icon{
+    color: #d8d8d8;
+    font-size: 4vh;
+    margin: 15px;
+  }
+  
+.icon:hover{
+    color: #0069da;
+}
+
+.menu .icon.active {
+    color: #0069da; /* Cor azul quando o ícone está ativo */
+}
