@@ -1,0 +1,9 @@
+.container-perfil{
+    display: flex;
+}
+
+.perfil{
+    width: 20vw;
+    height: 100vh;
+    background-color: #fefefe;
+}

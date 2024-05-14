@@ -1,10 +1,12 @@
 import React from "react"
+import Menu from "../componentes/menu"
 import './style.css'
 
 
 export default function Referencias() {
     return (
         <main className="container">
+            <Menu active={"referencias"} currentRoute={"/referencias"}/>
             <div className="perfil">
             <div className="referencia-menu">
                 <input type="text" className="referencia-menu__pesquisa" placeholder="Pesquisar..." />

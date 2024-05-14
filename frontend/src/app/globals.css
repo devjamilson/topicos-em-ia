@@ -48,10 +48,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 .menu.expanded {
-  width: 16vw; /* Largura expandida */
+  width: 16vw; 
 }
 
 main{

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Menu from "./componentes/menu"
+import NextAuthSessionProvider from '@/providers/sessionProvider'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,17 +18,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  var expand = false
   
   return (
     <html lang="pt-br">
       <body className={inter.className}>
+      <NextAuthSessionProvider>
         <div className="conteiner">
-            <Menu expand={expand}/>
             <div className="flex-grow">
               {children}
             </div>
         </div>
+        </NextAuthSessionProvider>
       </body>
     </html>
   );

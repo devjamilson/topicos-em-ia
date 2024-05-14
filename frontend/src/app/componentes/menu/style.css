@@ -1,14 +1,28 @@
+.menu{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgb(255, 255, 255);
+}
+
+.cont-icons{
+    height: 38vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
 .icon{
-    color: #d8d8d8;
+    color: #bdbdbd;
     font-size: 4vh;
     margin: 15px;
-  }
+}
   
 .icon:hover{
     color: #0069da;
 }
 
 .menu .icon.active {
-    color: #0069da; /* Cor azul quando o ícone está ativo */
+    color: #0069da; 
 }

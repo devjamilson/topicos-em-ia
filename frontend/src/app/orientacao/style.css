@@ -1,14 +1,10 @@
-.container{
+.container-orientacao{
     display: flex;
-}
-
-.cont-perfil{
-    display: flex;
-    width: 20vw;
 }
 
 .perfil{
     width: 20vw;
+    height: 100vh;
     background-color: #fefefe;
 }
 
@@ -41,4 +37,13 @@
 .aluno h2{
     font-size: 10px;
     color: #cdcdcd;
+}
+
+.cont-solicitacao{
+    height: 100%;
+    width: 75vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
