@@ -1,0 +1,8 @@
+.container{
+    display: flex;
+}
+
+.perfil{
+    width: 20vw;
+    background-color: #fefefe;
+}

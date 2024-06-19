@@ -3,7 +3,30 @@
 }
 
 .perfil{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     width: 20vw;
     height: 100vh;
     background-color: #fefefe;
+}
+
+
+.btn-sair{
+    width: 80%;
+    margin-bottom: 5vh; font-size: medium;
+    height: 7vh;
+    border: 1px solid #000;
+    border-radius: 15px;
+}
+
+
+.btn-sair:hover{
+    background-color: red;
+    width: 80%;
+    margin-bottom: 5vh;
+    border-radius: 15px;
+    color: #fefefe;
+    border: none;
 }

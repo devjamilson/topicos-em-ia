@@ -53,3 +53,38 @@
     width: 98%;
     font-size: 16px;
 }
+
+.form-env-solic{
+}
+
+.form-env-solic div label{
+    font-size: 18px;
+}
+
+.form-env-solic div{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-top: 5vh;
+    margin-left: 2vw;
+}
+.form-env-solic div textarea{
+    height: 30vh;
+    background-color: rgb(252, 252, 252);
+    border-radius: 16px;
+    width: 97%;
+    font-size: 18px;
+    padding-left: 10px;
+    resize: none;
+
+}
+
+.form-env-solic button{
+    font-size: 14px;
+    background-color: #1C3282;
+    color: #fff;
+    height: 5.5vh;
+    width: 16vw;
+    border-radius: 15px;
+    margin-left: 2vw;
+}

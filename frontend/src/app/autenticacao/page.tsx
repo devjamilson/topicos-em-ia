@@ -1,50 +1,65 @@
-'use client'
+'use client';
 import React, { useState, SyntheticEvent } from "react";
-import { signIn } from "next-auth/react";
+import { IoMdEye, IoIosEyeOff  } from "react-icons/io";
+import Image from 'next/image';
+import Logo from "../assets/imagens/logo.png";
 import { useRouter } from "next/navigation";
-import logo from '../assets/imagens/logo.png'
-import Image from "next/image";
-import './style.css'
+import Perfil from "../componentes/perfil"
 
-const DEFAULT_EMAIL = 'seuemail@example.com';
-const DEFAULT_PASSWORD = '10203040';
+import './style.css';
 
 export default function Autenticacao() {
-    const [email, setEmail] = useState<string>(DEFAULT_EMAIL);
-    const [password, setPassword] = useState<string>(DEFAULT_PASSWORD);
+
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [showPassword, setShowPassword] = useState<boolean>(false);
 
     const router = useRouter();
 
     async function handleSubmit(event: SyntheticEvent) {
         event.preventDefault();
 
-        // Simulação de autenticação bem-sucedida sem chamar o backend
-        const fakeSignIn = async () => {
-            return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve({ error: false });
-                }, 100); // Simular uma pequena pausa antes de retornar
+        try {
+            const response = await fetch('http://localhost:3001/v1/auth', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ login: email, password })
             });
-        };
 
-        const result = await fakeSignIn(); // Chamada simulada para autenticação
+            if (!response.ok) {
+                throw new Error('Erro na autenticação');
+            }
 
-        if (result?.error) {
-            console.log("Erro de autenticação simulado");
-            return;
+            const data = await response.json();
+
+            if (data.error) {
+                console.log("Erro de autenticação: ", data.message);
+                return;
+            }
+
+            // Armazenar o token de acesso conforme necessário
+            localStorage.setItem('accessToken', data.access_token); 
+
+            // Redirecionar para a página inicial
+            router.push('/inicial');
+        } catch (error) {
+            console.error('Erro ao autenticar:', error);
         }
-
-        router.push('/inicial');
     }
 
     return (
         <main className="container-auth">
             <div className="cont-form-auth">
+                <div className="cont-img">
+                    <Image className="img" src={Logo} alt="Logo" />
+                </div>
                 <h2>Sistema de Controle de TCC</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <input
-                            type="email"
+                        <input 
+                            type="text"
                             id="email"
                             placeholder="Informe o seu usuário..."
                             value={email}
@@ -52,18 +67,27 @@ export default function Autenticacao() {
                             required
                         />
                     </div>
-                    <div className="form-group">
-                        <input
-                            type="password"
-                            id="password"
-                            placeholder="Informe a sua senha..."
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                        <div className="cont-btn-esqueceu-senha">
-                            <button className="btn-esqueceu-senha">Esqueceu a Senha?</button>
+                    <div className="form-group-p">
+                        <div className="cont-form">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                id="password"
+                                placeholder="Informe a sua senha..."
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                            <button
+                                type="button"
+                                className="btn-show-password"
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? <IoIosEyeOff /> : <IoMdEye /> }
+                            </button>
                         </div>
+                    </div>
+                    <div className="cont-btn-esqueceu-senha">
+                            <button className="btn-esqueceu-senha" type="button">Esqueceu a Senha?</button>
                     </div>
                     <div className="form-group">
                         <button className="btn-acessar" type="submit">Acessar</button>

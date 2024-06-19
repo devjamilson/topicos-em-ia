@@ -5,6 +5,7 @@ import './style.css';
 import { LuLayoutPanelLeft } from 'react-icons/lu';
 import { FaCodePullRequest } from "react-icons/fa6";
 import { BiSolidMessageSquareDetail } from 'react-icons/bi';
+import { FaUsers } from "react-icons/fa";
 import { IoMdSettings, IoIosPaper } from "react-icons/io";
 import { FaRegCalendar, FaUserCircle } from 'react-icons/fa';
 
@@ -27,14 +28,11 @@ export default function Menu({ active, currentRoute }) {
         <Link href="/inicial">
           <LuLayoutPanelLeft className={`icon ${activeLink === '/inicial' ? 'active' : ''}`} />
         </Link>
-        <Link href="/chat">
-          <BiSolidMessageSquareDetail className={`icon ${activeLink === '/chat' ? 'active' : ''}`} />
-        </Link>
         <Link href="/calendario">
           <FaRegCalendar className={`icon ${activeLink === '/calendario' ? 'active' : ''}`} />
         </Link>
-        <Link href="/referencias">
-          <IoIosPaper className={`icon ${activeLink === '/referencias' ? 'active' : ''}`} />
+        <Link href="/banca">
+          <FaUsers className={`icon ${activeLink === '/banca' ? 'active' : ''}`} />
         </Link>
       </div>
       <div>
@@ -42,6 +40,7 @@ export default function Menu({ active, currentRoute }) {
           <IoMdSettings className={`icon ${activeLink === '/configuracao' ? 'active' : ''}`} />
         </Link>
       </div>
+      
     </div>
   );
 }

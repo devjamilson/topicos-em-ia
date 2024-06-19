@@ -1,0 +1,16 @@
+.cont-perfil{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.nome{
+    color: rgb(65, 65, 65);
+    font-size: 14px;
+}
+
+.email{
+    color: rgb(219, 219, 219);
+    font-size: 14px;
+}

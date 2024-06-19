@@ -1,77 +1,103 @@
 'use client'
 
 import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import Menu from "../componentes/menu";
-import COrientacao from "../componentes/orientacao";
-import './style.css';
+import COrientacao from "../componentes/corientacao";
 import Solicitacao from "../componentes/solicitacao";
+import Solicitado from "../componentes/solicitado";
+import './style.css';
+import Perfil from "../componentes/perfil";
 
 export default function Orientacao() {
-    // Estado para armazenar os itens da API para COrientacao
     const [orientacoes, setOrientacoes] = useState([]);
-
-    // Estado para armazenar os itens da API para Solicitacao
     const [solicitacoes, setSolicitacoes] = useState([]);
+    const [solicitacaoSelecionada, setSolicitacaoSelecionada] = useState(false);
+    const [userName, setUserName] = useState("Nome do Usuário");
+    const [userEmail, setUserEmail] = useState("emaildousuario@usuario.uepb.edu.br");
+    const [id, setId] = useState("2d7915ed-6146-4444-b2cc-ab9d55a408bf");
+    const [idProf, setIdProf] = useState("");
 
-    // Estado para armazenar a solicitação atualmente selecionada, default é a do Professor 1
-    const [solicitacaoSelecionada, setSolicitacaoSelecionada] = useState(null);
-
-    // Simulação de chamada à API (pode ser substituído por uma chamada real)
     useEffect(() => {
-        // Simulação de dados da API para COrientacao
-        const dadosDaAPIOrientacao = [
-            { id: 1, nome: "Professor 1" },
-            { id: 2, nome: "Professor 2" },
-            { id: 3, nome: "Professor 3" }
-        ];
+        const token = localStorage.getItem('accessToken');
+        if (!token) {
+            console.error('Token não encontrado no localStorage.');
+            return;
+        }
 
-        // Definindo os dados da API para COrientacao no estado
-        setOrientacoes(dadosDaAPIOrientacao);
+        const config = {
+            headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' }
+        };
 
-        // Simulação de dados da API para Solicitacao
-        const dadosDaAPISolicitacao = [
-            { id: 1, nome: "Solicitação 1", status:"em andamento", data:'10/05/2024' },
-            { id: 2, nome: "Solicitação 2", status:"pendente", data:'12/05/2024' },
-            { id: 3, nome: "Solicitação 3", status:"concluída", data:'15/05/2024' }
-        ];
+        axios.get(`http://localhost:3001/v1/alunos/${id}`, config)
+            .then(response => {
+                console.log('Resposta da API do usuário:', response.data);
+                setUserName(response.data.name);
+                setUserEmail(response.data.email);
+            })
+            .catch(error => {
+                console.error('Erro na requisição de usuário:', error);
+            });
 
-        // Definindo os dados da API para Solicitacao no estado
-        setSolicitacoes(dadosDaAPISolicitacao);
+        axios.get('http://localhost:3001/v1/professores/available', config)
+            .then(response => {
+                console.log('Resposta da API de Professores:', response.data);
+                setOrientacoes(response.data);
+            })
+            .catch(error => {
+                console.error('Erro na requisição de professores:', error);
+            });
+    }, [id]);
 
-        // Encontrar a solicitação correspondente ao Professor 1 e definir como a solicitação selecionada
-        const solicitacaoProfessor1 = dadosDaAPISolicitacao.find(solicitacao => solicitacao.id === 1);
-        setSolicitacaoSelecionada(solicitacaoProfessor1);
-    }, []);
-
-    // Função para lidar com o clique no componente COrientacao
     const handleClickCOrientacao = (professorId) => {
-        // Encontrar a solicitação correspondente ao professor clicado
-        const solicitacao = solicitacoes.find(solicitacao => solicitacao.id === professorId);
-        // Definir a solicitação selecionada
-        setSolicitacaoSelecionada(solicitacao);
+        const token = localStorage.getItem('accessToken');
+        const config = {
+            headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' }
+        };
+
+        axios.get(`http://localhost:3001/v1/professores/${professorId}/solicitacoes`, config)
+            .then(response => {
+                console.log('Resposta da API de Solicitações:', response.data);
+                setSolicitacoes(response.data);
+                setSolicitacaoSelecionada(true);
+                setIdProf(professorId);
+            })
+            .catch(error => {
+                console.error('Erro na requisição de solicitações:', error);
+            });
     };
 
     return (
         <main className="container-orientacao">
             <Menu active={"orientacao"} currentRoute={"/orientacao"} />
+
             <div className="perfil">
                 <div className="aluno">
                     <span className="aluno-img"></span>
                     <div>
-                        <h1>Nome do Aluno</h1>
-                        <h2>emaildoaluno@aluno.uepb.edu.br</h2>
+                        <Perfil></Perfil>
                     </div>
                 </div>
-                {/* Mapeando os itens da API para renderizar os componentes COrientacao */}
+
                 {orientacoes.map(orientacao => (
                     <button className="btn-corientacao" key={orientacao.id} onClick={() => handleClickCOrientacao(orientacao.id)}>
-                        <COrientacao nome={orientacao.nome} />
+                        <COrientacao nome={orientacao.name} status={orientacao.available ? "disponível" : "indisponível"} />
                     </button>
                 ))}
             </div>
+
             <div className="cont-solicitacao">
-                {/* Renderizando a Solicitacao correspondente à solicitação selecionada */}
-                {solicitacaoSelecionada && <Solicitacao nome={solicitacaoSelecionada.nome} status={solicitacaoSelecionada.status} data={solicitacaoSelecionada.data} />}
+                {solicitacaoSelecionada ? (
+                    solicitacoes.length > 0 ? (
+                        solicitacoes.map(solicitacao => (
+                            <Solicitado key={solicitacao.id} status={solicitacao.status} description={solicitacao.description} comment={solicitacao.comment}/>
+                        ))
+                    ) : (<Solicitacao id_professor={idProf} id_aluno={id} />
+                        
+                    )
+                ) : (
+                    <p>Sem solicitações</p>
+                )}
             </div>
         </main>
     );

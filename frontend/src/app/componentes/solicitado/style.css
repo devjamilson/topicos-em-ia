@@ -1,0 +1,32 @@
+
+
+.cont-solicitado {
+    width: 50vw;
+    height: 90vh;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.cont-solicitado h1 {
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    font-size: 18px;
+}
+
+.text-container {
+    width: 100%;
+    height: calc(100% - 40px); /* Ajuste para descontar o espaço do h1 */
+    overflow: hidden;
+}
+
+.text-container p {
+    font-size: 18px;
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    box-sizing: border-box;
+    word-wrap: break-word; /* Para que as palavras não saiam da largura do contêiner */
+    overflow: hidden; /* Esconde o conteúdo que transborda */
+    text-overflow: ellipsis; /* Adiciona reticências ao final do texto */
+}

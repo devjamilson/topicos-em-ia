@@ -46,5 +46,19 @@
    padding-left: 20px ;
 }
 
+.task-card {
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: grab;
+    margin-top: 10px;
+    font-size: 18px;
+    height: 13vh;
+}
 
-
+.data{
+    color: #0069da;
+    font-size:14px;
+}

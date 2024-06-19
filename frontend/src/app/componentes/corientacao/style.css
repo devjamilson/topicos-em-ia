@@ -13,9 +13,19 @@
     display: flex;
     align-items: center;
     flex-direction: row;
-    margin-bottom:2vh ;
-    border: 1px solid #0069DA;
     border-radius: 10px;
+}
+
+.borda-cinza{
+    border-radius: 10px;
+    margin-bottom:2vh ;
+    border: 1.5px solid #999999;
+}
+
+.borda-azul{
+    border-radius: 10px;
+    margin-bottom:2vh ;
+    border: 1.5px solid #0464ff;
 }
 
 
