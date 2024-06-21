@@ -1,13 +1,18 @@
-'use client'
-
 import React, { useState } from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import './style.css';
 
-const CalendarioMes = () => {
+const CalendarioMes = ({ onDateSelect }) => {
     const currentDate = new Date();
     const [ano, setAno] = useState(currentDate.getFullYear());
     const [mes, setMes] = useState(currentDate.getMonth());
+    const [dataSelecionada, setDataSelecionada] = useState(currentDate.getDate());
+
+    const handleDateClick = (dia) => {
+        setDataSelecionada(dia);
+        const date = new Date(ano, mes, dia);
+        onDateSelect(date.toISOString().split('T')[0]); // Passa a data selecionada no formato 'YYYY-MM-DD'
+    };
 
     const proximoMes = () => {
         setMes(prevMes => {
@@ -63,9 +68,14 @@ const CalendarioMes = () => {
                 ))}
             </div>
             <div className="dias-mes">
-                {diasDoMes.map((dia, index) => (
-                    <div key={index} className={dia === currentDate.getDate() ? "dia-mes current-day" : "dia-mes"}>{dia}</div>
-                ))}
+                {diasDoMes.map((dia, index) => {
+                    const dataAtual = new Date(ano, mes, dia);
+                    const isDiaAtual = dia === currentDate.getDate() && mes === currentDate.getMonth() && ano === currentDate.getFullYear();
+                    const isSelectedDay = dia === dataSelecionada && mes === currentDate.getMonth() && ano === currentDate.getFullYear();
+                    return (
+                        <div key={index} className={dia === null ? "dia-mes empty-day" : isDiaAtual ? "dia-mes current-day" : isSelectedDay ? "dia-mes selected-day" : "dia-mes"} onClick={() => dia !== null && handleDateClick(dia)}>{dia}</div>
+                    );
+                })}
             </div>
         </div>
     );

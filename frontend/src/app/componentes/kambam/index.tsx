@@ -1,18 +1,19 @@
 // Kambam.js
 'use client'
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HiPlusSm } from "react-icons/hi";
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import Modal from "../modalCriarTarefa";
 import './style.css';
 
 const initialData = [
-    { id: '1', title: 'Tarefa 1', status: 'Finalizado', deadline:'2024-06-7'},
-    { id: '2', title: 'Tarefa 2', status: 'Revisar', deadline:'2024-06-10' },
-    { id: '3', title: 'Tarefa 3', status: 'Finalizado', deadline:'2024-06-24'},
-    { id: '4', title: 'Tarefa 4', status: 'Em Progresso', deadline:'2024-06-7'},
-    { id: '5', title: 'Tarefa 5', status: 'Finalizado', deadline:'2024-06-10' },
-    { id: '6', title: 'Tarefa 6', status: 'Finalizado', deadline:'2024-06-24'},
+    { id: '1', title: 'Tarefa 1', status: 'Finalizado', deadline: '2024-06-7' },
+    { id: '2', title: 'Tarefa 2', status: 'Revisar', deadline: '2024-06-10' },
+    { id: '3', title: 'Tarefa 3', status: 'Finalizado', deadline: '2024-06-24' },
+    { id: '4', title: 'Tarefa 4', status: 'Em Progresso', deadline: '2024-06-7' },
+    { id: '5', title: 'Tarefa 5', status: 'Finalizado', deadline: '2024-06-10' },
+    { id: '6', title: 'Tarefa 6', status: 'Finalizado', deadline: '2024-06-24' },
 ];
 
 const ItemTypes = {
@@ -20,14 +21,27 @@ const ItemTypes = {
 };
 
 export default function Kambam() {
-
-
-
-
+    const [showModal, setShowModal] = useState(false);
     const [tasks, setTasks] = useState(initialData);
+    const [isAuthorized, setIsAuthorized] = useState(false);
+
+    useEffect(() => {
+        checkUserType();
+    }, []);
+
+    const checkUserType = () => {
+        const userType = localStorage.getItem('user_type');
+        if (userType === 'professor' || userType === 'gestor') {
+            setIsAuthorized(true);
+        }
+    };
 
     const handleAddTask = () => {
-        const newTask = { id: `${tasks.length + 1}`, title: `Tarefa ${tasks.length + 1}`, status: 'Em Progresso' };
+        setShowModal(true);
+    };
+
+    const handleSaveTask = (title, deadline) => {
+        const newTask = { id: `${tasks.length + 1}`, title, status: 'Em Progresso', deadline };
         setTasks([...tasks, newTask]);
     };
 
@@ -41,13 +55,16 @@ export default function Kambam() {
         <DndProvider backend={HTML5Backend}>
             <main className="container-kambam">
                 <header className="menu-kambam">
-                    <button onClick={handleAddTask}>Card <HiPlusSm /></button>
+                    {isAuthorized && (
+                        <button onClick={handleAddTask}>Card <HiPlusSm /></button>
+                    )}
                 </header>
                 <div className="cont-column">
                     {['Em Progresso', 'Revisar', 'Finalizado'].map(status => (
                         <Column key={status} status={status} tasks={tasks} moveTask={moveTask} />
                     ))}
                 </div>
+                <Modal show={showModal} onClose={() => setShowModal(false)} onSave={handleSaveTask} />
             </main>
         </DndProvider>
     );

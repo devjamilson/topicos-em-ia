@@ -6,3 +6,41 @@
     width: 20vw;
     background-color: #fefefe;
 }
+
+
+.perfil{
+    width: 20vw;
+    background-color: #fefefe;
+    height: 100vh;
+}
+
+.aluno{
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.aluno h1, h2{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.aluno-img{
+    height: 10vh;
+    width: 10vh;
+    border-radius: 600px;
+    background-color: rgb(178, 178, 178);
+    margin-right: 1vw;
+}
+
+.aluno h1{
+    font-size: 14px;
+}
+
+.aluno h2{
+    font-size: 10px;
+    color: #cdcdcd;
+}

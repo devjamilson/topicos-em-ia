@@ -64,3 +64,14 @@
     background-color: #0069da;
     color: white;
 }
+
+
+.empty-day {
+    visibility: hidden;
+}
+
+
+.selected-day {
+    background-color: #ff8000; /* Azul */
+    color: #fff; /* Texto branco */
+}

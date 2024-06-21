@@ -10,7 +10,7 @@ import './style.css';
 
 export default function Autenticacao() {
 
-    const [email, setEmail] = useState<string>('');
+    const [user, setUser] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -25,7 +25,7 @@ export default function Autenticacao() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ login: email, password })
+                body: JSON.stringify({ login: user, password })
             });
 
             if (!response.ok) {
@@ -38,11 +38,13 @@ export default function Autenticacao() {
                 console.log("Erro de autenticação: ", data.message);
                 return;
             }
-
-            // Armazenar o token de acesso conforme necessário
             localStorage.setItem('accessToken', data.access_token); 
 
-            // Redirecionar para a página inicial
+            localStorage.setItem('user_name', user);
+            localStorage.removeItem('user_email');
+            localStorage.removeItem('user_type');
+            localStorage.removeItem('user_id');
+
             router.push('/inicial');
         } catch (error) {
             console.error('Erro ao autenticar:', error);
@@ -62,8 +64,8 @@ export default function Autenticacao() {
                             type="text"
                             id="email"
                             placeholder="Informe o seu usuário..."
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            value={user}
+                            onChange={(e) => setUser(e.target.value)}
                             required
                         />
                     </div>

@@ -52,14 +52,7 @@ export default function Solicitacao({ id_professor, id_aluno }) {
 
     return (
         <div className="container-solicitacao">
-            <div className="status">
-                <div className="info-status">
-                    <h1><strong>Solicitação:</strong></h1>
-                </div>
-                <div className="data-status">
-                    <h1><strong>Status:</strong><span>{status}</span></h1>
-                </div>
-            </div>
+            
             <form onSubmit={handleSubmit} className="form-env-solic">
                 <div>
                     <label>Descrição:</label>
@@ -70,7 +63,7 @@ export default function Solicitacao({ id_professor, id_aluno }) {
                     />
                 </div>
                 <div>
-                    <label>Comentario:</label>
+                    <label>Comentário:</label>
                     <textarea 
                         value={comment} 
                         onChange={(e) => setComment(e.target.value)} 

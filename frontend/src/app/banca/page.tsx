@@ -3,8 +3,9 @@
 import React, {useState} from "react";
 import Menu from "../componentes/menu";
 import './style.css';
-import InfoCalendario from "../componentes/info-calendario";
-import TarefaComponente from "../componentes/tarefaComponente";
+import InfoBanca from "../componentes/info-banca";
+import BancaComponente from "../componentes/bancaComponente";
+import Perfil from "../componentes/perfil"
 
 export default function Banca() {
     const [tarefaSelecionada, setTarefaSelecionada] = useState(null);
@@ -20,12 +21,18 @@ export default function Banca() {
         <main className="container">
              <Menu active={"banca"} currentRoute={"/banca"}  />
              <div className="perfil">
+                <div className="aluno">
+                        <span className="aluno-img"></span>
+                        <div>
+                            <Perfil />
+                        </div>
+                 </div>
                 <div className="container-menu-banca">
-                   <InfoCalendario onTarefaClick={handleTarefaClick}  ></InfoCalendario>
+                   <InfoBanca onTarefaClick={handleTarefaClick}  ></InfoBanca>
                 </div>
             </div>
            <div>
-                 {tarefaSelecionada && <TarefaComponente tarefa={tarefaSelecionada} />}
+                 {tarefaSelecionada && <BancaComponente tarefa={tarefaSelecionada} />}
 
             </div> 
         </main>
