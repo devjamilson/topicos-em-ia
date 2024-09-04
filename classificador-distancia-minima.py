@@ -7,16 +7,16 @@ from sklearn.model_selection import train_test_split
 #data = pd.read_csv('/content/drive/MyDrive/arquivo/Iris data - Iris.csv')
 data = pd.read_csv('./Iris.csv', nrows=100) #Ler apenas as duas primeiras classes
 
-data.iloc[:, :4] = data.iloc[:, :4].replace(',', '.', regex=True)
+data.iloc[:, :4] = data.iloc[:, :4].replace(',', '.', regex=True) #Transformar todos os . em ,
 
-data.iloc[:, :4] = data.iloc[:, :4].astype(float)
+data.iloc[:, :4] = data.iloc[:, :4].astype(float) #Transformar todos os dados para o tipo float
 
-X = data.iloc[:, :4].values
+X = data.iloc[:, :4].values #Pegar todos os vetores
 
-y = data.iloc[:, 4].values
+y = data.iloc[:, 4].values #Pegar todas as classes dos vetores
 
 # Separando dados em treino e teste
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
 class manualMinDistanceClassifier:
     def __init__(self):
