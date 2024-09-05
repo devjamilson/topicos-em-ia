@@ -52,7 +52,7 @@ class perceptronDelta:
         y_pred.append('setosa')
       else:
         y_pred.append('versicolor')
-    return y_pred
+    return np.array(y_pred)
 
   def predict_one(self, x):
     dotProduct = self.calculate_dot_product(x)
