@@ -95,17 +95,17 @@ class manualMinDistanceClassifier:
     #     return slope, intercept
 
 # Exemplo de treino
-manualClassifier = manualMinDistanceClassifier()
-manualClassifier.fit(X_train, y_train)
+# manualClassifier = manualMinDistanceClassifier()
+# manualClassifier.fit(X_train, y_train)
 
-# Aplicar o classificador ao conjunto de testes
-y_pred = manualClassifier.predict(X_test)
+# # Aplicar o classificador ao conjunto de testes
+# y_pred = manualClassifier.predict(X_test)
 
 # Calcular a acurácia
-accuracy = accuracy_score(y_test, y_pred)
-print(f"Acurácia no conjunto de testes: {accuracy:.2f}")
-print("Classes previstas:", y_pred)
-print("Classes verdadeiras:", y_test)
+# accuracy = accuracy_score(y_test, y_pred)
+# print(f"Acurácia no conjunto de testes: {accuracy:.2f}")
+# print("Classes previstas:", y_pred)
+# print("Classes verdadeiras:", y_test)
 
 # Geração da superfície de decisão
 # xx, yy, Z = manualClassifier.decision_surface(feature_index1=0, feature_index2=1)

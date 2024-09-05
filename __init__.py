@@ -1,0 +1,3 @@
+from .classificador_distancia_minima import manualMinDistanceClassifier
+from .perceptron_regra_delta import perceptronDelta
+from .perceptron_simples import perceptron
