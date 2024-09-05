@@ -42,6 +42,16 @@ print(f"             Pred. Setosa    Pred. Versicolor")
 print(f"Real Setosa       {matriz_conf_knn[0, 0]}               {matriz_conf_knn[1, 0]}")
 print(f"Real Versicolor   {matriz_conf_knn[0, 1]}               {matriz_conf_knn[1, 1]}")
 
+# Calcular as métricas de avaliação usando a função refatorada
+acuracia_knn, precisao_knn, revocacao_knn, f1_knn = UtilsCalcs.calcular_metricas(y_test, 'setosa', y_pred_knn, 'versicolor')
+
+# Imprimir as métricas de avaliação
+print("\nMétricas de Avaliação KNN:")
+print(f"Acurácia: {acuracia_knn:.4f}")
+print(f"Precisão: {precisao_knn:.4f}")
+print(f"Revocação: {revocacao_knn:.4f}")
+print(f"f1_knn-Score: {f1_knn:.4f}")
+
 #---------------Perceptron sem Regra Delta---------------
 X_perceptron = data_setosa_versicolor.iloc[:, :4].values #Pegar todos os vetores
 
@@ -79,6 +89,16 @@ print("Matriz de Confusão Perceptron:")
 print(f"             Pred. Setosa    Pred. Versicolor")
 print(f"Real Setosa       {matriz_conf_perceptron[0, 0]}               {matriz_conf_perceptron[1, 0]}")
 print(f"Real Versicolor   {matriz_conf_perceptron[0, 1]}               {matriz_conf_perceptron[1, 1]}")
+
+# Calcular as métricas de avaliação para o Perceptron Simples
+acuracia_perceptron, precisao_perceptron, revocacao_perceptron, f1_perceptron = UtilsCalcs.calcular_metricas(y_test_perceptron, 'setosa', y_pred_perceptron, 'versicolor')
+
+# Imprimir as métricas de avaliação para Perceptron Simples
+print("\nMétricas de Avaliação Perceptron Simples:")
+print(f"Acurácia: {acuracia_perceptron:.4f}")
+print(f"Precisão: {precisao_perceptron:.4f}")
+print(f"Revocação: {revocacao_perceptron:.4f}")
+print(f"F1-Score: {f1_perceptron:.4f}")
 
 
 #--------------Perceptron Delta--------------
@@ -118,4 +138,15 @@ print("Matriz de Confusão Perceptron Delta:")
 print(f"             Pred. Setosa    Pred. Virginica")
 print(f"Real Setosa       {matriz_conf_perceptron_delta[0, 0]}               {matriz_conf_perceptron_delta[1, 0]}")
 print(f"Real Virginica    {matriz_conf_perceptron_delta[0, 1]}               {matriz_conf_perceptron_delta[1, 1]}")
+
+# Calcular as métricas de avaliação para o Perceptron Delta
+acuracia_perceptron_delta, precisao_perceptron_delta, revocacao_perceptron_delta, f1_perceptron_delta = UtilsCalcs.calcular_metricas(y_test_perceptron_delta, 'setosa', y_pred_perceptron_delta, 'virginica')
+
+# Imprimir as métricas de avaliação para Perceptron Delta
+print("\nMétricas de Avaliação Perceptron Delta:")
+print(f"Acurácia: {acuracia_perceptron_delta:.4f}")
+print(f"Precisão: {precisao_perceptron_delta:.4f}")
+print(f"Revocação: {revocacao_perceptron_delta:.4f}")
+print(f"F1-Score: {f1_perceptron_delta:.4f}")
+
 

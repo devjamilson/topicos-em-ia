@@ -1,9 +1,7 @@
 import numpy as np
 
 class UtilsCalcs:
-    def __init__(self):
-        self
-
+    @staticmethod
     def matriz_confusao_manual(y_true, classe_1, y_pred, classe_2):
         VP = np.sum((y_true == str(classe_1)) & (y_pred == str(classe_1)))
         VN = np.sum((y_true == str(classe_2)) & (y_pred == str(classe_2)))
@@ -11,8 +9,9 @@ class UtilsCalcs:
         FN = np.sum((y_true == str(classe_1)) & (y_pred == str(classe_2)))
         return np.array([[VP, FP], [FN, VN]])
 
-    def calcular_metricas(y_true, y_pred):
-        cm = matriz_confusao_manual(y_true, y_pred)
+    @staticmethod
+    def calcular_metricas(y_true, classe_1, y_pred, classe_2):
+        cm = UtilsCalcs.matriz_confusao_manual(y_true, classe_1, y_pred, classe_2)
         VP, FP = cm[0]
         FN, VN = cm[1]
     
@@ -32,4 +31,4 @@ class UtilsCalcs:
             f1 = 0
 
         # Retornando todas as métricas
-        return acuracia, precisao, revocacao, f1, cm
+        return acuracia, precisao, revocacao, f1

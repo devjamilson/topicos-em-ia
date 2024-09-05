@@ -28,7 +28,7 @@ class perceptronDelta:
   def __init__(self):
     self.weights = np.zeros(5)
     #self.bias = 0
-    self.learn_rate = 0.02
+    self.learn_rate = 0.05
 
   def fit(self, X, y, epochs):
     quantidade_amostras = len(X)

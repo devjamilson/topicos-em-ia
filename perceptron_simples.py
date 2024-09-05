@@ -26,9 +26,9 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 
 class perceptron:
   def __init__(self):
-    self.weights = np.zeros(4)
+    self.weights = np.zeros(5)
     #self.bias = 0
-    self.learn_rate = 0.02
+    self.learn_rate = 0.05
 
   def fit(self, X, y, epochs):
     quantidade_amostras = len(X)
