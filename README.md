@@ -10,9 +10,7 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas em s
 
 ## Instalação
 
-Siga os passos abaixo para clonar e configurar o projeto localmente:
-
-### 1. Clone o repositório
+Siga os passos abaixo para clonar e configurar o projeto:
 
 ```bash
 git clone https://github.com/seu-usuario/seu-repositorio.git
