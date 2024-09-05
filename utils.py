@@ -4,11 +4,11 @@ class UtilsCalcs:
     def __init__(self):
         self
 
-    def matriz_confusao_manual(y_true, y_pred):
-        VP = np.sum((y_true == 1) & (y_pred == 1))
-        VN = np.sum((y_true == 0) & (y_pred == 0))
-        FP = np.sum((y_true == 0) & (y_pred == 1))
-        FN = np.sum((y_true == 1) & (y_pred == 0))
+    def matriz_confusao_manual(y_true, classe_1, y_pred, classe_2):
+        VP = np.sum((y_true == str(classe_1)) & (y_pred == str(classe_1)))
+        VN = np.sum((y_true == str(classe_2)) & (y_pred == str(classe_2)))
+        FP = np.sum((y_true == str(classe_2)) & (y_pred == str(classe_1)))
+        FN = np.sum((y_true == str(classe_1)) & (y_pred == str(classe_2)))
         return np.array([[VP, FP], [FN, VN]])
 
     def calcular_metricas(y_true, y_pred):

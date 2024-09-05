@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 from classificador_distancia_minima import manualMinDistanceClassifier
 from perceptron_regra_delta import perceptronDelta
 from perceptron_simples import perceptron
+from utils import UtilsCalcs
 
 # Carregar o arquivo CSV inteiro
 data_total = pd.read_csv('./Iris.csv')
@@ -33,17 +34,13 @@ minimalDistance.fit(X_train, y_train)
 
 y_pred_knn = minimalDistance.predict(X_test)
 
-# Calcular manualmente a matriz de confusão
-true_setosa_knn = sum((y_test == 'setosa') & (y_pred_knn == 'setosa'))
-false_setosa_knn = sum((y_test == 'versicolor') & (y_pred_knn == 'setosa'))
-true_versicolor_knn = sum((y_test == 'versicolor') & (y_pred_knn == 'versicolor'))
-false_versicolor_knn = sum((y_test == 'setosa') & (y_pred_knn == 'versicolor'))
+# Calcular e imprimir a matriz de confusão usando a função refatorada
+matriz_conf_knn = UtilsCalcs.matriz_confusao_manual(y_test, 'setosa', y_pred_knn, 'versicolor')
 
-# Imprimir a matriz de confusão
 print("Matriz de Confusão KNN:")
 print(f"             Pred. Setosa    Pred. Versicolor")
-print(f"Real Setosa       {true_setosa_knn}               {false_versicolor_knn}")
-print(f"Real Versicolor   {false_setosa_knn}               {true_versicolor_knn}")
+print(f"Real Setosa       {matriz_conf_knn[0, 0]}               {matriz_conf_knn[1, 0]}")
+print(f"Real Versicolor   {matriz_conf_knn[0, 1]}               {matriz_conf_knn[1, 1]}")
 
 #---------------Perceptron sem Regra Delta---------------
 X_perceptron = data_setosa_versicolor.iloc[:, :4].values #Pegar todos os vetores
@@ -75,17 +72,13 @@ y_pred_perceptron = perceptronBin.predict(X_test_perceptron)
 # print("Classes preditas: ", y_pred_perceptron)
 # print("Acurácia:", accuracy_percptron)
 
-# Calcular manualmente a matriz de confusão
-true_setosa_perceptron = sum((y_test_perceptron == 'setosa') & (y_pred_perceptron == 'setosa'))
-false_setosa_perceptron = sum((y_test_perceptron == 'versicolor') & (y_pred_perceptron == 'setosa'))
-true_versicolor_perceptron = sum((y_test_perceptron == 'versicolor') & (y_pred_perceptron == 'versicolor'))
-false_versicolor_perceptron = sum((y_test_perceptron == 'setosa') & (y_pred_perceptron == 'versicolor'))
+# Calcular e imprimir a matriz de confusão usando a função refatorada
+matriz_conf_perceptron = UtilsCalcs.matriz_confusao_manual(y_test_perceptron, 'setosa', y_pred_perceptron, 'versicolor')
 
-# Imprimir a matriz de confusão
 print("Matriz de Confusão Perceptron:")
 print(f"             Pred. Setosa    Pred. Versicolor")
-print(f"Real Setosa       {true_setosa_perceptron}               {false_versicolor_perceptron}")
-print(f"Real Versicolor   {false_setosa_perceptron}               {true_versicolor_perceptron}")
+print(f"Real Setosa       {matriz_conf_perceptron[0, 0]}               {matriz_conf_perceptron[1, 0]}")
+print(f"Real Versicolor   {matriz_conf_perceptron[0, 1]}               {matriz_conf_perceptron[1, 1]}")
 
 
 #--------------Perceptron Delta--------------
@@ -118,15 +111,11 @@ perceptronDelta.fit(X_train_perceptron_delta, y_train_perceptron_delta, epochs=1
 y_pred_perceptron_delta = perceptronDelta.predict(X_test_perceptron_delta)
 # print(y_pred_perceptron_delta)
 
-# Calcular manualmente a matriz de confusão
-true_setosa_perceptron_delta = sum((y_test_perceptron_delta == 'setosa') & (y_pred_perceptron_delta == 'setosa'))
-false_setosa_perceptron_delta = sum((y_test_perceptron_delta == 'virginica') & (y_pred_perceptron_delta == 'setosa'))
-true_virginica_perceptron_delta = sum((y_test_perceptron_delta == 'virginica') & (y_pred_perceptron_delta == 'virginica'))
-false_virginica_perceptron_delta = sum((y_test_perceptron_delta == 'setosa') & (y_pred_perceptron_delta == 'virginica'))
+# Calcular e imprimir a matriz de confusão usando a função refatorada
+matriz_conf_perceptron_delta = UtilsCalcs.matriz_confusao_manual(y_test_perceptron_delta, 'setosa', y_pred_perceptron_delta, 'virginica')
 
-# Imprimir a matriz de confusão
 print("Matriz de Confusão Perceptron Delta:")
-print(f"             Pred. Setosa    Pred. Versicolor")
-print(f"Real Setosa       {true_setosa_perceptron_delta}               {false_virginica_perceptron_delta}")
-print(f"Real virginica   {false_setosa_perceptron_delta}               {true_virginica_perceptron_delta}")
+print(f"             Pred. Setosa    Pred. Virginica")
+print(f"Real Setosa       {matriz_conf_perceptron_delta[0, 0]}               {matriz_conf_perceptron_delta[1, 0]}")
+print(f"Real Virginica    {matriz_conf_perceptron_delta[0, 1]}               {matriz_conf_perceptron_delta[1, 1]}")
 
