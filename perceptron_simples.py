@@ -4,31 +4,31 @@ import numpy as np
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 
-#data = pd.read_csv('/content/drive/MyDrive/arquivo/Iris data - Iris.csv')
-data = pd.read_csv('./Iris.csv', nrows=100) #Ler apenas as duas primeiras classes
+# #data = pd.read_csv('/content/drive/MyDrive/arquivo/Iris data - Iris.csv')
+# data = pd.read_csv('./Iris.csv', nrows=100) #Ler apenas as duas primeiras classes
 
-data.iloc[:, :4] = data.iloc[:, :4].replace(',', '.', regex=True) #Transformar todos os . em ,
+# data.iloc[:, :4] = data.iloc[:, :4].replace(',', '.', regex=True) #Transformar todos os . em ,
 
-data.iloc[:, :4] = data.iloc[:, :4].astype(float) #Transformar todos os dados para o tipo float
+# data.iloc[:, :4] = data.iloc[:, :4].astype(float) #Transformar todos os dados para o tipo float
 
-X = data.iloc[:, :4].values #Pegar todos os vetores
+# X = data.iloc[:, :4].values #Pegar todos os vetores
 
-y = data.iloc[:, 4].values #Pegar todas as classes dos vetores
+# y = data.iloc[:, 4].values #Pegar todas as classes dos vetores
 
-#Aumentar vetores para incluir bias
-# Cria uma coluna de uns com o mesmo número de linhas que arr
-ones_column = np.ones((X.shape[0], 1))
-# Concatena a coluna de uns ao final de cada vetor
-X = np.hstack((X, ones_column))
+# #Aumentar vetores para incluir bias
+# # Cria uma coluna de uns com o mesmo número de linhas que arr
+# ones_column = np.ones((X.shape[0], 1))
+# # Concatena a coluna de uns ao final de cada vetor
+# X = np.hstack((X, ones_column))
 
-# Separando dados em treino e teste
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=55)
+# # Separando dados em treino e teste
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=55)
 
 class perceptron:
   def __init__(self):
     self.weights = np.zeros(5)
     #self.bias = 0
-    self.learn_rate = 0.05
+    self.learn_rate = 0.01
 
   def fit(self, X, y, epochs):
     quantidade_amostras = len(X)

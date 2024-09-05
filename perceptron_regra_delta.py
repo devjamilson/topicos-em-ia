@@ -28,7 +28,7 @@ class perceptronDelta:
   def __init__(self):
     self.weights = np.zeros(5)
     #self.bias = 0
-    self.learn_rate = 0.05
+    self.learn_rate = 0.01
 
   def fit(self, X, y, epochs):
     quantidade_amostras = len(X)
@@ -59,7 +59,7 @@ class perceptronDelta:
     if dotProduct > 0:
       return print('setosa')
     else:
-      return print('versicolor')
+      return print('virginica')
 
   def calculate_dot_product(self, x):
     return sum(x * w for x, w in zip(x, self.weights))
