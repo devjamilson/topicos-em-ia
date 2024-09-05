@@ -41,7 +41,7 @@ class perceptronDelta:
         if y[i] == 'setosa' and dotProduct <= 0:
           self.update_weights_class1(X[i])
 
-        elif y[i] == 'versicolor' and dotProduct >= 0:
+        elif y[i] == 'virginica' and dotProduct >= 0:
           self.update_weights_class2(X[i])
 
   def predict(self, X):
@@ -51,7 +51,7 @@ class perceptronDelta:
       if dotProduct > 0:
         y_pred.append('setosa')
       else:
-        y_pred.append('versicolor')
+        y_pred.append('virginica')
     return np.array(y_pred)
 
   def predict_one(self, x):
