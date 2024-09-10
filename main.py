@@ -31,6 +31,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_
 # Exemplo de treino
 minimalDistance = manualMinDistanceClassifier()
 minimalDistance.fit(X_train, y_train)
+minimalDistance.print_function()
 
 y_pred_knn = minimalDistance.predict(X_test)
 
@@ -121,7 +122,7 @@ ones_column = np.ones((X_perceptron_delta.shape[0], 1))
 X_perceptron_delta = np.hstack((X_perceptron_delta, ones_column))
 
 # Separando dados em treino e teste
-X_train_perceptron_delta, X_test_perceptron_delta, y_train_perceptron_delta, y_test_perceptron_delta = train_test_split(X_perceptron_delta, Y_perceptron_delta, test_size=0.3, random_state=45)
+X_train_perceptron_delta, X_test_perceptron_delta, y_train_perceptron_delta, y_test_perceptron_delta = train_test_split(X_perceptron_delta, Y_perceptron_delta, test_size=0.3, random_state=7)
 perceptronDelta = perceptronDelta()
 
 # Exemplo de treino

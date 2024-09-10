@@ -58,6 +58,18 @@ class manualMinDistanceClassifier:
         for sample in X:
             predictions.append(self.decision(sample))
         return np.array(predictions)
+    
+    def print_function(self):
+        # Obtenha os centróides das classes
+        mu1 = self.centroids['setosa']
+        mu2 = self.centroids['versicolor']
+
+        # Calcule os coeficientes w1, w2, w3, w4 e o bias
+        w = mu1 - mu2
+        b = 0.5 * (np.dot(mu2, mu2) - np.dot(mu1, mu1))
+
+        # Imprime a função discriminante
+        print(f"D(x) = {w[0]:.2f}x1 + {w[1]:.2f}x2 + {w[2]:.2f}x3 + {w[3]:.2f}x4 + {b:.2f}")
 
     # def decision_surface(self, feature_index1, feature_index2, resolution=0.01):
     #     # Gera uma grade de valores
